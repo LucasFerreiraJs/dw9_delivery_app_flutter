@@ -39,6 +39,7 @@ class SplashPage extends StatelessWidget {
                     label: "Acessar",
                     onPressed: () {
                       print("acessar tap");
+                      Navigator.of(context).popAndPushNamed("/home");
                     },
                     width: context.percentWidth(.6),
                     height: 35,
