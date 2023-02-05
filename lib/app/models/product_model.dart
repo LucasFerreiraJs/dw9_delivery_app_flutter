@@ -1,12 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class ProductModel {
-  final int id;
-  final String name;
-  final String description;
-  final double price;
-  final String image;
+  int id;
+  String name;
+  String description;
+  double price;
+  String image;
 
   ProductModel({
     required this.id,
@@ -16,8 +15,24 @@ class ProductModel {
     required this.image,
   });
 
+  ProductModel copyWith({
+    int? id,
+    String? name,
+    String? description,
+    double? price,
+    String? image,
+  }) {
+    return ProductModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      price: price ?? this.price,
+      image: image ?? this.image,
+    );
+  }
+
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'id': id,
       'name': name,
       'description': description,
@@ -28,15 +43,32 @@ class ProductModel {
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      description: map['description'] as String,
-      price: map['price'] as double,
-      image: map['image'] as String,
+      id: map['id']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      price: map['price']?.toDouble() ?? 0.0,
+      image: map['image'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'ProductModel(id: $id, name: $name, description: $description, price: $price, image: $image)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ProductModel && other.id == id && other.name == name && other.description == description && other.price == price && other.image == image;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^ name.hashCode ^ description.hashCode ^ price.hashCode ^ image.hashCode;
+  }
 }

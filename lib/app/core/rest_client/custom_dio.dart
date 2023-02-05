@@ -5,7 +5,7 @@ import 'package:dw9_delivery_app/app/core/config/env/env.dart';
 class CustomDio extends DioForNative {
   CustomDio()
       : super(BaseOptions(
-          baseUrl: Env.instance['background_base_url'] ?? '',
+          baseUrl: Env.instance['backend_base_url'] ?? '',
           connectTimeout: 5000,
           receiveTimeout: 60000,
         )) {

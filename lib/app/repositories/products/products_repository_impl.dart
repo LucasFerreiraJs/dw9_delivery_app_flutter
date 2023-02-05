@@ -11,14 +11,20 @@ class ProductRepositoryImpl implements ProductRepository {
   ProductRepositoryImpl({required this.dio});
 
   @override
-  Future<List<ProductModel>> findAllProduct() async {
+  Future<List<ProductModel>> findAllProducts() async {
     try {
       final result = await dio.unauth().get('/products');
-      var products = ProductModel.fromJson(result.toString());
-      print(products);
+      // var products = ProductModel.fromJson(result.toString());
+      // print("products recebidos $products");
 
       // * passar o <ProductModel>, se não será list<dynamic>
-      return result.data.map<ProductModel>((prod) => ProductModel.fromMap(prod)).toList();
+      // return result.data
+      //     .map<ProductModel>(
+      //       (prod) => ProductModel.fromMap(prod),
+      //     )
+      //     .toList();
+
+      return (result.data as List).cast<Map<String, dynamic>>().map<ProductModel>(ProductModel.fromMap).toList();
     } on DioError catch (err, stack) {
       log("Erro ao buscar os produtos", error: err, stackTrace: stack);
       throw RepositoryException(message: "Erro ao buscar os produtos");
