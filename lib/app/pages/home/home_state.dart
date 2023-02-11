@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dw9_delivery_app/app/dto/order_product_dto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:match/match.dart';
 
@@ -18,27 +19,31 @@ class HomeState extends Equatable {
   final HomeStateStatus status;
   final List<ProductModel> products;
   final String? errorMessage;
+  final List<OrderProductDto> shoppingBag;
 
-  const HomeState(this.status, this.products, this.errorMessage);
+  const HomeState(this.status, this.products, this.errorMessage, this.shoppingBag);
 
   const HomeState.inital()
       : status = HomeStateStatus.initial,
         products = const <ProductModel>[],
-        errorMessage = null;
+        errorMessage = null,
+        shoppingBag = const <OrderProductDto>[];
 
   @override
-  List<Object?> get props => [status, products, errorMessage];
+  List<Object?> get props => [status, products, errorMessage, shoppingBag];
 
   // * para gerar novo status
   HomeState copyWith({
     HomeStateStatus? status,
     List<ProductModel>? products,
     String? errorMessage,
+    List<OrderProductDto>? shoppingBag,
   }) {
     return HomeState(
       status ?? this.status,
       products ?? this.products,
       errorMessage ?? this.errorMessage,
+      shoppingBag ?? this.shoppingBag,
     );
   }
 }

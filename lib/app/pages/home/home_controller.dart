@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:dw9_delivery_app/app/dto/order_product_dto.dart';
 
 import 'package:dw9_delivery_app/app/pages/home/home_state.dart';
 import 'package:dw9_delivery_app/app/repositories/products/products_repository.dart';
@@ -26,4 +27,14 @@ class HomeController extends Cubit<HomeState> {
       emit(state.copyWith(status: HomeStateStatus.error, errorMessage: "erro ao buscar produtos"));
     }
   }
+
+  void addOrUpdateBag(OrderProductDto orderProduct) {
+    // * stream não é reativo, por isso duplicamos o estado e entregamos uma nova versão dele
+    final shoppingBag = [...state.shoppingBag];
+    shoppingBag.add(orderProduct);
+    emit(state.copyWith(shoppingBag: shoppingBag));
+  }
 }
+
+
+// 1:25
