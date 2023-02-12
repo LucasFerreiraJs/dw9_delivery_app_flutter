@@ -51,7 +51,9 @@ class LoginPage extends StatelessWidget {
                 child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
                   Text("Não possui uma conta", style: context.textStyles.textBold),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/auth/register');
+                    },
                     child: Text(
                       "Cadastre-se",
                       style: context.textStyles.textBold.copyWith(color: Colors.blue),
