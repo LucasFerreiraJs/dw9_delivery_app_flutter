@@ -43,6 +43,7 @@ class AppTextStyles {
 
   // * prototype
   TextStyle get textButtonLabel => textBold.copyWith(fontSize: 14);
+  TextStyle get textTitle => textExtraBold.copyWith(fontSize: 28);
 }
 
 extension AppTextStylesExtension on BuildContext {
