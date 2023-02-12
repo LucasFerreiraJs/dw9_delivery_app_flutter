@@ -31,7 +31,20 @@ class HomeController extends Cubit<HomeState> {
   void addOrUpdateBag(OrderProductDto orderProduct) {
     // * stream não é reativo, por isso duplicamos o estado e entregamos uma nova versão dele
     final shoppingBag = [...state.shoppingBag];
-    shoppingBag.add(orderProduct);
+
+    // verificar se já está adicionado
+    final orderItemIndex = shoppingBag.indexWhere((orderItem) => orderItem.product == orderProduct.product);
+    if (orderItemIndex > -1) {
+      // remover da lista
+      if (orderProduct.amount == 0) {
+        shoppingBag.removeAt(orderItemIndex);
+      } else {
+        shoppingBag[orderItemIndex] = orderProduct;
+      }
+    } else {
+      shoppingBag.add(orderProduct);
+    }
+
     emit(state.copyWith(shoppingBag: shoppingBag));
   }
 }

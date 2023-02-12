@@ -6,6 +6,7 @@ import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_appbar.dart';
 import 'package:dw9_delivery_app/app/pages/home/home_controller.dart';
 import 'package:dw9_delivery_app/app/pages/home/home_state.dart';
 import 'package:dw9_delivery_app/app/pages/home/widget/delivery_product_tile.dart';
+import 'package:dw9_delivery_app/app/pages/home/widget/shopping_bag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,9 +27,9 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DeliveryAppbar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {},
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {},
+      // ),
       body: BlocConsumer<HomeController, HomeState>(
         listener: (context, state) {
           state.status.matchAny(
@@ -62,6 +63,11 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                     );
                   },
                 ),
+              ),
+
+              Visibility(
+                visible: state.shoppingBag.isNotEmpty,
+                child: ShoppingBagWidget(bag: state.shoppingBag),
               ),
             ],
           );

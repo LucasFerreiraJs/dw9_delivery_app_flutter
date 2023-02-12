@@ -36,6 +36,38 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetail
     controller.initial(amount, widget.order != null);
   }
 
+  void _showConfirmDelete(int amount) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return AlertDialog(title: Text("Deseja excluir o produto?"), actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Cancelar",
+                style: context.textStyles.textBold.copyWith(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.of(context).pop(OrderProductDto(
+                  product: widget.product,
+                  amount: amount,
+                ));
+              },
+              child: Text(
+                "Confirmar",
+                style: context.textStyles.textBold.copyWith(),
+              ),
+            )
+          ]);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,32 +134,41 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetail
                 child: BlocBuilder<ProductDetailController, int>(
                   builder: (context, state) {
                     return ElevatedButton(
+                      style: state == 0 ? ElevatedButton.styleFrom(backgroundColor: Colors.red) : null,
                       onPressed: () {
-                        Navigator.of(context).pop(OrderProductDto(
-                          product: widget.product,
-                          amount: state,
-                        ));
+                        if (state == 0) {
+                          _showConfirmDelete(state);
+                        } else {
+                          Navigator.of(context).pop(OrderProductDto(
+                            product: widget.product,
+                            amount: state,
+                          ));
+                        }
                       },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Expanded(child: Text("Adicionar", style: context.textStyles.textExtraBold.copyWith(fontSize: 13))),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: AutoSizeText(
-                                (widget.product.price * state).currencyPTBR,
-                                maxFontSize: 13,
-                                minFontSize: 5,
-                                maxLines: 1,
-                                style: context.textStyles.textExtraBold.copyWith(fontSize: 13),
+                      child: Visibility(
+                        visible: state > 0,
+                        replacement: Text("Excluir Produto", style: context.textStyles.textExtraBold),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(child: Text("Adicionar", style: context.textStyles.textExtraBold.copyWith(fontSize: 13))),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: AutoSizeText(
+                                  (widget.product.price * state).currencyPTBR,
+                                  maxFontSize: 13,
+                                  minFontSize: 5,
+                                  maxLines: 1,
+                                  style: context.textStyles.textExtraBold.copyWith(fontSize: 13),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -140,3 +181,8 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetail
     );
   }
 }
+
+
+
+
+// 1:29
