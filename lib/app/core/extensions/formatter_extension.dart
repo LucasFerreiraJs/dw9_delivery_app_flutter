@@ -8,4 +8,12 @@ extension FormatterExtension on double {
     );
     return currencyFormat.format(this);
   }
+
+  String get currencyENUS {
+    final currencyFormat = NumberFormat.currency(
+      locale: "en_US",
+      symbol: r"$",
+    );
+    return currencyFormat.format(this);
+  }
 }
