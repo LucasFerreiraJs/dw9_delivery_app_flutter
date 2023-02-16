@@ -18,7 +18,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final result = await dio.unauth().post('auth', data: {'email': email, 'password': password});
       return AuthModel.fromMap(result.data);
     } on DioError catch (err, stackErr) {
-      // * erro permissão
+      // * email/senha errada
       if (err.response?.statusCode == 403) {
         log("Premissão negada", error: err, stackTrace: stackErr);
         throw UnauthorizedException();
