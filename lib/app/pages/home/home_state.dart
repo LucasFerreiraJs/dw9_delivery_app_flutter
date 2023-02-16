@@ -23,7 +23,7 @@ class HomeState extends Equatable {
 
   const HomeState(this.status, this.products, this.errorMessage, this.shoppingBag);
 
-  const HomeState.inital()
+  HomeState.initial()
       : status = HomeStateStatus.initial,
         products = const <ProductModel>[],
         errorMessage = null,
