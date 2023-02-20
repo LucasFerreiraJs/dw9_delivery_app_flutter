@@ -12,12 +12,12 @@ enum RegisterStatus {
   error,
 }
 
-class RegisterState {
+class RegisterState extends Equatable {
   final RegisterStatus status;
 
-  RegisterState({required this.status});
+  const RegisterState({required this.status});
 
-  RegisterState.initial() : status = RegisterStatus.initial;
+  const RegisterState.initial() : status = RegisterStatus.initial;
 
   RegisterState copyWith({
     RegisterStatus? status,
@@ -26,4 +26,8 @@ class RegisterState {
       status: status ?? this.status,
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [status];
 }

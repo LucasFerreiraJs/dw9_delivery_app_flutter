@@ -15,7 +15,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<AuthModel> login(String email, String password) async {
     try {
-      final result = await dio.unauth().post('auth', data: {'email': email, 'password': password});
+      final result = await dio.unauth().post('/auth', data: {'email': email, 'password': password});
       return AuthModel.fromMap(result.data);
     } on DioError catch (err, stackErr) {
       // * email/senha errada

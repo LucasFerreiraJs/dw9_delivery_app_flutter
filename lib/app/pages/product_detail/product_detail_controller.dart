@@ -16,6 +16,3 @@ class ProductDetailController extends Cubit<int> {
     }
   }
 }
-
-
-// 50:00

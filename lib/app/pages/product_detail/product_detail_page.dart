@@ -181,8 +181,3 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetail
     );
   }
 }
-
-
-
-
-// 1:29

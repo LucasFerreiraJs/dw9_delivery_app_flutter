@@ -48,6 +48,3 @@ class HomeController extends Cubit<HomeState> {
     emit(state.copyWith(shoppingBag: shoppingBag));
   }
 }
-
-
-// 1:25
