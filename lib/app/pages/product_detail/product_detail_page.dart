@@ -31,7 +31,6 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetailController> {
   @override
   void onReady() {
-    // TODO: implement onReady
     final amount = widget.order?.amount ?? 1;
     controller.initial(amount, widget.order != null);
   }

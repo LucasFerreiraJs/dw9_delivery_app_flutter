@@ -15,7 +15,6 @@ class DeliveryProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("DeliveryProductTile ${product.name}");
     return InkWell(
       onTap: () async {
         // * soluçao para stateless
