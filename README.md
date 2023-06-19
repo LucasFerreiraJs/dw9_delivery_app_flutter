@@ -1,6 +1,6 @@
 
 <div align="center">
-  <h2 style="font-size:30px; font-weight: 700;">Real-Time Messenger App</h2>
+  <h2 style="font-size:30px; font-weight: 700;">Vakinha Burguer</h2>
 </div>
 
 <p align="center" style="margin-top: 35px; width: 100%" >
