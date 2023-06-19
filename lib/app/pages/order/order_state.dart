@@ -12,7 +12,11 @@ enum OrderStatus {
   initial,
   loading,
   loaded,
+  updateOrder,
   error,
+  confirmRemoveProduct,
+  emptyBag,
+  success,
 }
 
 class OrderState extends Equatable {
@@ -27,6 +31,8 @@ class OrderState extends Equatable {
     required this.paymentTypes,
     this.errorMessage,
   });
+
+  double get totalOrder => orderProducts.fold(0.0, (previousValue, element) => previousValue + element.totalPrice);
 
   OrderState.initial()
       : status = OrderStatus.initial,
@@ -54,4 +60,18 @@ class OrderState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+}
+
+class OrderConfirmDeleteproductState extends OrderState {
+  final OrderProductDto orderProduct;
+  final int index;
+
+  OrderConfirmDeleteproductState({
+    required this.orderProduct,
+    required this.index,
+    required super.status,
+    required super.orderProducts,
+    required super.paymentTypes,
+    super.errorMessage,
+  });
 }

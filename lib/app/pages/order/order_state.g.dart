@@ -11,7 +11,11 @@ extension OrderStatusMatch on OrderStatus {
       {required T Function() initial,
       required T Function() loading,
       required T Function() loaded,
-      required T Function() error}) {
+      required T Function() updateOrder,
+      required T Function() error,
+      required T Function() confirmRemoveProduct,
+      required T Function() emptyBag,
+      required T Function() success}) {
     final v = this;
     if (v == OrderStatus.initial) {
       return initial();
@@ -25,8 +29,24 @@ extension OrderStatusMatch on OrderStatus {
       return loaded();
     }
 
+    if (v == OrderStatus.updateOrder) {
+      return updateOrder();
+    }
+
     if (v == OrderStatus.error) {
       return error();
+    }
+
+    if (v == OrderStatus.confirmRemoveProduct) {
+      return confirmRemoveProduct();
+    }
+
+    if (v == OrderStatus.emptyBag) {
+      return emptyBag();
+    }
+
+    if (v == OrderStatus.success) {
+      return success();
     }
 
     throw Exception('OrderStatus.match failed, found no match for: $this');
@@ -37,7 +57,11 @@ extension OrderStatusMatch on OrderStatus {
       T Function()? initial,
       T Function()? loading,
       T Function()? loaded,
-      T Function()? error}) {
+      T Function()? updateOrder,
+      T Function()? error,
+      T Function()? confirmRemoveProduct,
+      T Function()? emptyBag,
+      T Function()? success}) {
     final v = this;
     if (v == OrderStatus.initial && initial != null) {
       return initial();
@@ -51,8 +75,24 @@ extension OrderStatusMatch on OrderStatus {
       return loaded();
     }
 
+    if (v == OrderStatus.updateOrder && updateOrder != null) {
+      return updateOrder();
+    }
+
     if (v == OrderStatus.error && error != null) {
       return error();
+    }
+
+    if (v == OrderStatus.confirmRemoveProduct && confirmRemoveProduct != null) {
+      return confirmRemoveProduct();
+    }
+
+    if (v == OrderStatus.emptyBag && emptyBag != null) {
+      return emptyBag();
+    }
+
+    if (v == OrderStatus.success && success != null) {
+      return success();
     }
 
     return any();
